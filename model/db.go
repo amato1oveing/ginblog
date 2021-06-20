@@ -23,7 +23,6 @@ func InitDb() {
 	if err != nil {
 		fmt.Println("连接数据库失败，err:", err)
 	}
-	defer db.Close()
 	db.SingularTable(true) //禁用复数
 	db.AutoMigrate(&User{}, &Category{}, &Article{})
 
