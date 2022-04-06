@@ -91,3 +91,14 @@ func DeleteArt(c *gin.Context) {
 	})
 
 }
+
+//批量删除文章
+func DeleteArts(c *gin.Context) {
+	var ids []int
+	_ = c.ShouldBindJSON(&ids)
+	code = model.DeleteArts(ids) //批量删除
+	c.JSON(http.StatusOK, gin.H{
+		"status": code,
+		"msg":    errmsg.GetErrMsg(code),
+	})
+}

@@ -10,7 +10,6 @@ import (
 
 //添加分类
 func AddCate(c *gin.Context) {
-	//todo 添加分类
 	var cates model.Category
 	_ = c.ShouldBindJSON(&cates)
 	code = model.CheckCate(cates.Name)

@@ -79,3 +79,13 @@ func DeleteArt(id int) int {
 	}
 	return errmsg.SUCCESS
 }
+
+//批量删除文章
+func DeleteArts(ids []int) int {
+	var art Article
+	err := db.Where("id in (?)", ids).Delete(&art).Error
+	if err != nil {
+		return errmsg.ERROR
+	}
+	return errmsg.SUCCESS
+}

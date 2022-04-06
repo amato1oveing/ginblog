@@ -2,6 +2,7 @@ package model
 
 import (
 	"encoding/base64"
+	"errors"
 	"ginblog/utils/errmsg"
 	"github.com/jinzhu/gorm"
 	"golang.org/x/crypto/scrypt"
@@ -33,6 +34,16 @@ func CreateUser(data *User) int {
 		return errmsg.ERROR
 	}
 	return errmsg.SUCCESS
+}
+
+//查询用户
+func GetUser(username string) (user User, err error) {
+	var users User
+	db.Where("username = ?", username).First(&users)
+	if users.ID > 0 {
+		return users, nil
+	}
+	return users, errors.New("用户不存在")
 }
 
 //查询用户列表

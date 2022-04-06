@@ -30,9 +30,23 @@ func AddUser(c *gin.Context) {
 }
 
 //查询单个用户
-//func GetOneUser(c *gin.Context) {
-//
-//}
+func GetUser(c *gin.Context) {
+	//todo 查询单个用户
+	id := c.Param("id")
+	user, err := model.GetUser(id)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"status": errmsg.ERROR_USER_NOT_EXIST,
+			"msg":    errmsg.GetErrMsg(errmsg.ERROR_USER_NOT_EXIST),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status": errmsg.SUCCESS,
+		"data":   user,
+		"msg":    errmsg.GetErrMsg(errmsg.SUCCESS),
+	})
+}
 
 //查询用户列表
 func GetUsers(c *gin.Context) {
