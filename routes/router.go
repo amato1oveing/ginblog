@@ -25,11 +25,15 @@ func InitRouter() {
 		auth.POST("article/add", v1.AddArt)
 		auth.PUT("article/:id", v1.EditArt)
 		auth.DELETE("article/:id", v1.DeleteArt)
+		auth.DELETE("article/ids", v1.DeleteArts)
+
+		auth.POST("quit", v1.Logout)
 	}
 
 	router := r.Group("api/v1")
 	{
 		router.POST("user/add", v1.AddUser)
+		router.GET("user_only", v1.GetUser)
 		router.GET("users", v1.GetUsers)
 		router.GET("category", v1.GetCate)
 		router.GET("article", v1.GetArt)

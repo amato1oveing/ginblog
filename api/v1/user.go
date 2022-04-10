@@ -12,7 +12,6 @@ var code int
 
 //添加用户
 func AddUser(c *gin.Context) {
-	//todo 添加用户
 	var users model.User
 	_ = c.ShouldBindJSON(&users)
 	code = model.CheckUser(users.Username)
@@ -31,7 +30,6 @@ func AddUser(c *gin.Context) {
 
 //查询单个用户
 func GetUser(c *gin.Context) {
-	//todo 查询单个用户
 	id := c.Param("id")
 	user, err := model.GetUser(id)
 	if err != nil {

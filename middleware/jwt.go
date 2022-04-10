@@ -24,7 +24,7 @@ func SetToken(username string) (string, int) {
 		"username",
 		jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
-			Issuer:    "ginblog",
+			Issuer:    username,
 		},
 	}
 	reqClaim := jwt.NewWithClaims(jwt.SigningMethodHS256, setClaims)
@@ -52,7 +52,7 @@ var code int
 
 func JwtToken() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		tokenHeader := c.Request.Header.Get("Authorization")
+		tokenHeader, _ := c.Cookie("token")
 		if tokenHeader == "" {
 			code = errmsg.ERROR_TOKEN_EXIST
 			c.JSON(http.StatusOK, gin.H{

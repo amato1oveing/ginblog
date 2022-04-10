@@ -10,7 +10,6 @@ import (
 
 ///添加文章
 func AddArt(c *gin.Context) {
-	//todo 添加文章
 	var art model.Article
 	_ = c.ShouldBindJSON(&art)
 	code = model.CreateArt(&art)
